@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6df7e04-9961-4e60-bebe-ca1ffd57594c">
+	<property name="ireport.zoom" value="1.500000000000048"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+        <property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+
+	<parameter name="awal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="akhir1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tb_barang.`id_barang` AS tb_barang_id_barang,
+     tb_barang.`nama_jenis` AS tb_barang_nama_jenis,
+     tb_barang.`nama_barang` AS tb_barang_nama_barang,
+     tb_barang.`kuantitas` AS tb_barang_kuantitas,
+     tb_barang.`harga_jual` AS tb_barang_harga_jual,
+     tb_barang.`harga_beli` AS tb_barang_harga_beli,
+     tb_detail_penjualan.`id_penjualan` AS tb_detail_penjualan_id_penjualan,
+     tb_detail_penjualan.`id_barang` AS tb_detail_penjualan_id_barang,
+     tb_detail_penjualan.`jumlah` AS tb_detail_penjualan_jumlah,
+     tb_detail_penjualan.`subtotal` AS tb_detail_penjualan_subtotal,
+     tb_penjualan.`id_penjualan` AS tb_penjualan_id_penjualan,
+     tb_penjualan.`id_client` AS tb_penjualan_id_client,
+     tb_penjualan.`tgl_penjualan` AS tb_penjualan_tgl_penjualan,
+     tb_penjualan.`id_karyawan` AS tb_penjualan_id_karyawan,
+     tb_penjualan.`Bayar` AS tb_penjualan_Bayar,
+     tb_penjualan.`Kembalian` AS tb_penjualan_Kembalian,
+     tb_penjualan.`total_harga` AS tb_penjualan_total_harga,
+     tb_penjualan.`garansi` AS tb_penjualan_garansi
+FROM
+     `tb_barang` tb_barang INNER JOIN `tb_detail_penjualan` tb_detail_penjualan ON tb_barang.`id_barang` = tb_detail_penjualan.`id_barang`
+     INNER JOIN `tb_penjualan` tb_penjualan ON tb_detail_penjualan.`id_penjualan` = tb_penjualan.`id_penjualan`
+where tb_penjualan.`tgl_penjualan` BETWEEN $P{awal} AND $P{akhir1}]]>
+	</queryString>
+	<field name="tb_barang_id_barang" class="java.lang.String"/>
+	<field name="tb_barang_nama_jenis" class="java.lang.String"/>
+	<field name="tb_barang_nama_barang" class="java.lang.String"/>
+	<field name="tb_barang_kuantitas" class="java.lang.Integer"/>
+	<field name="tb_barang_harga_jual" class="java.lang.Integer"/>
+	<field name="tb_barang_harga_beli" class="java.lang.Integer"/>
+	<field name="tb_detail_penjualan_id_penjualan" class="java.lang.String"/>
+	<field name="tb_detail_penjualan_id_barang" class="java.lang.String"/>
+	<field name="tb_detail_penjualan_jumlah" class="java.lang.Integer"/>
+	<field name="tb_detail_penjualan_subtotal" class="java.lang.Integer"/>
+	<field name="tb_penjualan_id_penjualan" class="java.lang.String"/>
+	<field name="tb_penjualan_id_client" class="java.lang.String"/>
+	<field name="tb_penjualan_tgl_penjualan" class="java.sql.Date"/>
+	<field name="tb_penjualan_id_karyawan" class="java.lang.String"/>
+	<field name="tb_penjualan_Bayar" class="java.lang.Integer"/>
+	<field name="tb_penjualan_Kembalian" class="java.lang.Integer"/>
+	<field name="tb_penjualan_total_harga" class="java.lang.Integer"/>
+	<field name="tb_penjualan_garansi" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="306" y="1" width="239" height="41" uuid="efbcafe2-a796-4b8c-93af-01d7b9fff65d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="24"/>
+				</textElement>
+				<text><![CDATA[Laporan Penjualan]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="1" y="16" width="51" height="20" uuid="fc3fa7b6-429c-45c1-8bf6-0e9ea67e73c5"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="54" y="16" width="49" height="20" uuid="6c6d23f9-2e38-49d4-9da9-dc66fa5f5f20"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement x="700" y="1" width="1" height="28" uuid="910daf2e-0edf-4dcd-b148-e1e576a7d37f"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="28" uuid="166dbaad-37af-42b6-a5c5-8465b33273ad"/>
+			</line>
+			<line>
+				<reportElement x="359" y="1" width="1" height="28" uuid="b61c6bb2-709f-4c74-a348-d404cf3ffd92"/>
+			</line>
+			<line>
+				<reportElement x="256" y="1" width="1" height="28" uuid="6e6e5e5d-97e6-459e-9f1a-8005a62cfeba"/>
+			</line>
+			<line>
+				<reportElement x="201" y="1" width="1" height="28" uuid="72ffb481-1341-4560-9f1c-bb83b0c1ae0d"/>
+			</line>
+			<line>
+				<reportElement x="87" y="1" width="1" height="28" uuid="51c0103a-33b4-4ee4-b42b-c28b7819b2b6"/>
+			</line>
+			<line>
+				<reportElement x="519" y="1" width="1" height="28" uuid="4869aaff-486a-45f4-a43e-d52df969aed5"/>
+			</line>
+			<line>
+				<reportElement x="462" y="1" width="1" height="28" uuid="e79b63ce-fe64-41b7-a4da-8c2a786e89f5"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="b172bb40-1daf-48ba-a7be-bc9c8edc9bb4"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="801" y="1" width="1" height="28" uuid="902249ef-70c4-4c3a-ac7c-af9b9d45ce85"/>
+			</line>
+			<line>
+				<reportElement x="0" y="29" width="802" height="1" uuid="a88fb9b1-81e9-4ed4-b3d5-b1ab9720a6d7"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="6" y="5" width="77" height="20" uuid="fb571588-b814-447a-af39-10fcbc6bb7f7"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Id Penjualan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="5" width="40" height="20" uuid="97e5db8c-3110-446e-8bcf-c9d2d20b9048"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="262" y="5" width="37" height="20" uuid="69500e51-a753-4350-a3a6-2398960306b5"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Harga Jual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="5" width="47" height="20" uuid="71184b3d-efa9-4da4-be22-2d6df246185c"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[SubTotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="5" width="46" height="20" uuid="b82a964e-bd04-4465-896a-263f39611d31"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Garansi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="5" width="74" height="20" uuid="d28841be-40ff-4ddc-b329-8d9c0bffaa0a"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="706" y="5" width="32" height="20" uuid="8cd2aa6b-aa40-4ca3-8471-21c9269a1250"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Bayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="605" y="6" width="29" height="20" uuid="b6ee2c19-1dca-4d54-80b1-67fdd33c3a3e"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="599" y="1" width="1" height="28" uuid="034d5c52-1769-4f54-bfd7-fe11aac0adf9"/>
+			</line>
+			<staticText>
+				<reportElement x="525" y="5" width="43" height="20" uuid="059cfd41-784a-4b12-9e88-0bce3370cb06"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="28" width="802" height="1" uuid="6505d01d-40fd-41d0-aa46-8913ee3bda0c"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="700" y="0" width="1" height="28" uuid="f45e9ef6-de7e-4714-baf9-7b9b99aa3a43"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="28" uuid="7f47d1f5-d62d-49ab-8389-5c9b3eac68fd"/>
+			</line>
+			<line>
+				<reportElement x="359" y="0" width="1" height="28" uuid="83c17d2f-6186-490e-88df-4c878fe2b666"/>
+			</line>
+			<line>
+				<reportElement x="256" y="0" width="1" height="28" uuid="9b087ba8-64f1-4c42-be1d-7d159082d224"/>
+			</line>
+			<line>
+				<reportElement x="201" y="0" width="1" height="28" uuid="f042e507-2bcf-42fa-8dc0-7bcf3c617640"/>
+			</line>
+			<line>
+				<reportElement x="87" y="0" width="1" height="28" uuid="be05f631-b165-4efd-b95e-21f8c62b9f3b"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="28" uuid="e8341328-9af4-492a-ac78-f352455a209d"/>
+			</line>
+			<line>
+				<reportElement x="519" y="0" width="1" height="28" uuid="92fd86ae-caff-47b1-8879-ca0fe16223f7"/>
+			</line>
+			<line>
+				<reportElement x="462" y="0" width="1" height="28" uuid="3c7f39cc-5ed9-4f05-92fe-242764ccc3ea"/>
+			</line>
+			<textField>
+				<reportElement x="6" y="4" width="59" height="20" uuid="bb8a44c1-2e12-4723-9533-a19455502407"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_penjualan_id_penjualan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="93" y="4" width="103" height="20" uuid="8affb682-1b46-4442-a080-be8e18fdb875"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_barang_nama_barang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="207" y="4" width="45" height="20" uuid="edde2125-59d0-4c6b-8c58-c2ea43a917f4"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_detail_penjualan_jumlah}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="4" width="92" height="20" uuid="5276a3bb-030e-48d1-a082-a86702638dd9"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_barang_harga_jual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="4" width="46" height="20" uuid="6c00c3b9-9974-4a8f-b4f9-c34cc7afb936"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_penjualan_garansi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="604" y="4" width="96" height="20" uuid="bad0e64d-544b-4efd-81dd-bfb6aed6e6b8"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_penjualan_total_harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="705" y="4" width="96" height="20" uuid="b0de2292-3466-434c-91b4-7b6e37980b6a"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_penjualan_Bayar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="365" y="4" width="92" height="20" uuid="161d52de-de59-4918-8989-a033d96d8fc8"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_detail_penjualan_subtotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="599" y="0" width="1" height="28" uuid="b07d3821-a766-4ff0-b367-f3824e1f696a"/>
+			</line>
+			<textField>
+				<reportElement x="524" y="4" width="75" height="20" uuid="dc4ad597-b2f6-4d52-8c9c-c67d1ea1e909"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_penjualan_tgl_penjualan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="25">
+			<textField>
+				<reportElement x="768" y="3" width="33" height="20" uuid="218d456c-5372-44b0-9d96-15ed1cc0ef39"/>
+				<textElement>
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

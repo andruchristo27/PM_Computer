@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6df7e04-9961-4e60-bebe-ca1ffd57594c">
+	<property name="ireport.zoom" value="1.3636363636363849"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="awal" class="java.util.Date">
+             <property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="akhir" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tb_client.`id_client` AS tb_client_id_client,
+     tb_client.`nama_client` AS tb_client_nama_client,
+     tb_client.`alamat` AS tb_client_alamat,
+     tb_client.`no_hp` AS tb_client_no_hp,
+     tb_detail_pembelian.`id_pembelian` AS tb_detail_pembelian_id_pembelian,
+     tb_detail_pembelian.`id_barang` AS tb_detail_pembelian_id_barang,
+     tb_detail_pembelian.`jumlah` AS tb_detail_pembelian_jumlah,
+     tb_detail_pembelian.`subtotal` AS tb_detail_pembelian_subtotal,
+     tb_pembelian.`id_pembelian` AS tb_pembelian_id_pembelian,
+     tb_pembelian.`tgl_pembelian` AS tb_pembelian_tgl_pembelian,
+     tb_pembelian.`id_client` AS tb_pembelian_id_client,
+     tb_pembelian.`total` AS tb_pembelian_total,
+     tb_barang.`id_barang` AS tb_barang_id_barang,
+     tb_barang.`nama_jenis` AS tb_barang_nama_jenis,
+     tb_barang.`nama_barang` AS tb_barang_nama_barang,
+     tb_barang.`kuantitas` AS tb_barang_kuantitas,
+     tb_barang.`harga_jual` AS tb_barang_harga_jual,
+     tb_barang.`harga_beli` AS tb_barang_harga_beli
+FROM
+     `tb_client` tb_client INNER JOIN `tb_pembelian` tb_pembelian ON tb_client.`id_client` = tb_pembelian.`id_client`
+     INNER JOIN `tb_detail_pembelian` tb_detail_pembelian ON tb_pembelian.`id_pembelian` = tb_detail_pembelian.`id_pembelian`
+     INNER JOIN `tb_barang` tb_barang ON tb_detail_pembelian.`id_barang` = tb_barang.`id_barang`
+where   tb_pembelian.`tgl_pembelian` BETWEEN $P{awal} AND $P{akhir}]]>
+	</queryString>
+	<field name="tb_client_id_client" class="java.lang.String"/>
+	<field name="tb_client_nama_client" class="java.lang.String"/>
+	<field name="tb_client_alamat" class="java.lang.String"/>
+	<field name="tb_client_no_hp" class="java.lang.String"/>
+	<field name="tb_detail_pembelian_id_pembelian" class="java.lang.String"/>
+	<field name="tb_detail_pembelian_id_barang" class="java.lang.String"/>
+	<field name="tb_detail_pembelian_jumlah" class="java.lang.Integer"/>
+	<field name="tb_detail_pembelian_subtotal" class="java.lang.Integer"/>
+	<field name="tb_pembelian_id_pembelian" class="java.lang.String"/>
+	<field name="tb_pembelian_tgl_pembelian" class="java.sql.Date"/>
+	<field name="tb_pembelian_id_client" class="java.lang.String"/>
+	<field name="tb_pembelian_total" class="java.lang.Integer"/>
+	<field name="tb_barang_id_barang" class="java.lang.String"/>
+	<field name="tb_barang_nama_jenis" class="java.lang.String"/>
+	<field name="tb_barang_nama_barang" class="java.lang.String"/>
+	<field name="tb_barang_kuantitas" class="java.lang.Integer"/>
+	<field name="tb_barang_harga_jual" class="java.lang.Integer"/>
+	<field name="tb_barang_harga_beli" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="291" y="2" width="239" height="41" uuid="2a6c4503-6e7f-407c-99bd-a17733a7a80b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="24"/>
+				</textElement>
+				<text><![CDATA[Laporan Pembelian]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="5" y="14" width="38" height="20" uuid="3f4d3b97-cb60-46a3-be7b-ed1753363b27"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="43" y="14" width="49" height="20" uuid="34b05a22-a8c0-49be-bab8-f876175cec01"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement x="696" y="1" width="1" height="28" uuid="06572614-fa9b-40fb-bb9a-dd5ff32ddfcd"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="b2482fb6-1dc9-4e70-bb09-595ea77de59e"/>
+			</line>
+			<staticText>
+				<reportElement x="6" y="6" width="77" height="20" uuid="f6c4e9ae-10de-4e9a-a419-c93bf8930333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Id Pembelian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="6" width="65" height="20" uuid="907cb122-2c3a-469b-a89b-bb38d7ff9f58"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Nama Klien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="5" width="45" height="20" uuid="f85cf02e-cd10-4ea2-b795-bfea46b392ac"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="5" width="39" height="20" uuid="7399635b-91bf-4c5d-a2a8-feb60f6cb6fe"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="601" y="6" width="46" height="20" uuid="7d464426-bd69-4107-a749-85ae3cef103b"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="94" y="6" width="68" height="20" uuid="d5091d68-758b-49b7-a966-14eaa2035b8e"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Nama Jenis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="702" y="6" width="29" height="20" uuid="e2ca9993-0848-454f-9262-cef5ccf2d802"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="1" height="28" uuid="8a4fbc9e-71fc-4fea-a4c1-4e3cfa70b3e2"/>
+			</line>
+			<line>
+				<reportElement x="801" y="1" width="1" height="28" uuid="3a7984ec-3ff4-47a9-9351-639d8c171952"/>
+			</line>
+			<line>
+				<reportElement x="595" y="1" width="1" height="28" uuid="877432ea-0b65-466a-a759-b0ba8aaa3c43"/>
+			</line>
+			<line>
+				<reportElement x="341" y="1" width="1" height="28" uuid="1577b8b8-4a9f-4062-8896-53038bdd73a6"/>
+			</line>
+			<line>
+				<reportElement x="402" y="1" width="1" height="28" uuid="0c8d60cf-4925-49ae-8566-39bd6f56606f"/>
+			</line>
+			<line>
+				<reportElement x="218" y="1" width="1" height="28" uuid="fbf2f51b-9186-42cd-9da6-16ee0b719ace"/>
+			</line>
+			<line>
+				<reportElement x="88" y="1" width="1" height="28" uuid="4cb83af1-bb5f-4c92-93a9-262bf546186e"/>
+			</line>
+			<line>
+				<reportElement x="1" y="28" width="801" height="1" uuid="1bb95c51-8be2-4e72-9116-51387953f5e0"/>
+			</line>
+			<staticText>
+				<reportElement x="408" y="5" width="45" height="20" uuid="bba73b88-a5c8-4da0-b665-8fc0a58120bb"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<line>
+				<reportElement x="484" y="1" width="1" height="28" uuid="bb1f7550-65c8-4bc1-88c3-73f1b68aa660"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<line>
+				<reportElement x="696" y="0" width="1" height="28" uuid="870947e1-8939-4999-b2a7-e926e71e419a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="28" width="802" height="1" uuid="d8866afd-0d80-4d52-8bd7-79ee7419cc05"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="595" y="0" width="1" height="28" uuid="181109c9-3701-4405-85b4-7e38d569957f"/>
+			</line>
+			<line>
+				<reportElement x="402" y="0" width="1" height="28" uuid="3b340870-385d-41ce-9aed-9b2a1344169f"/>
+			</line>
+			<line>
+				<reportElement x="341" y="0" width="1" height="28" uuid="9de84e0c-bbbd-43fb-abb5-8ca102d09364"/>
+			</line>
+			<line>
+				<reportElement x="218" y="0" width="1" height="28" uuid="a82e54ef-668c-4169-a14e-9709a1895acc"/>
+			</line>
+			<line>
+				<reportElement x="88" y="0" width="1" height="28" uuid="6df0afb0-930b-479a-8d8a-a9006fcce510"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="28" uuid="70c5ce55-2661-4500-b5e0-8f3b846ce4f6"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="28" uuid="1d960b57-672b-4cde-96e3-077bcf9b451f"/>
+			</line>
+			<textField>
+				<reportElement x="6" y="3" width="77" height="20" uuid="a6cc3176-e4b6-4be0-9ae4-eed88d64e0c5"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_pembelian_id_pembelian}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="3" width="119" height="20" uuid="a83b4d62-091e-4a9c-8c1e-3b99aa9cb2a3"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_barang_nama_jenis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="3" width="112" height="20" uuid="834191c5-670a-4c46-9732-c747a826a00b"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_client_nama_client}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="347" y="3" width="50" height="20" uuid="57b3943d-bf7a-457c-9b04-868dfd72f516"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_detail_pembelian_jumlah}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="3" width="100" height="20" uuid="8c3ffe35-ed9d-4630-8672-604acf451684"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_barang_harga_beli}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="601" y="3" width="95" height="20" uuid="9e36b4b8-151f-4efd-ba0a-5c2a1c6f5d97"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_detail_pembelian_subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="701" y="3" width="100" height="20" uuid="ba017e8d-3bb8-46fb-9de2-cccf3d7382e0"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_pembelian_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="484" y="-1" width="1" height="28" uuid="6f9bdd29-6a0e-49ad-87c7-f4cd8d99b39b"/>
+			</line>
+			<textField>
+				<reportElement x="408" y="3" width="75" height="20" uuid="232a7f5b-f739-486e-b907-0eefe4fa027e"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_pembelian_tgl_pembelian}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="23">
+			<textField>
+				<reportElement x="769" y="0" width="33" height="20" uuid="7fd7f75c-8d2e-4a4d-a46b-e13f2945be43"/>
+				<textElement>
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

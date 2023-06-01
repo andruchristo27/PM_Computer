@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6df7e04-9961-4e60-bebe-ca1ffd57594c">
+	<property name="ireport.zoom" value="1.3636363636363957"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+         <property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<parameter name="awal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="akhir" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tb_trs_service.`id_transaksi_service` AS tb_trs_service_id_transaksi_service,
+     tb_trs_service.`id_service` AS tb_trs_service_id_service,
+     tb_trs_service.`harga_total` AS tb_trs_service_harga_total,
+     tb_trs_service.`bayar` AS tb_trs_service_bayar,
+     tb_trs_service.`kembalian` AS tb_trs_service_kembalian,
+     tb_service.`id_service` AS tb_service_id_service,
+     tb_service.`nama_barang` AS tb_service_nama_barang,
+     tb_service.`id_client` AS tb_service_id_client,
+     tb_service.`keluhan` AS tb_service_keluhan,
+     tb_service.`tgl_mulai` AS tb_service_tgl_mulai,
+     tb_service.`tgl_selesai` AS tb_service_tgl_selesai,
+     tb_service.`status` AS tb_service_status,
+     tb_client.`id_client` AS tb_client_id_client,
+     tb_client.`nama_client` AS tb_client_nama_client,
+     tb_client.`alamat` AS tb_client_alamat,
+     tb_client.`no_hp` AS tb_client_no_hp
+FROM
+     `tb_service` tb_service INNER JOIN `tb_trs_service` tb_trs_service ON tb_service.`id_service` = tb_trs_service.`id_service`
+     INNER JOIN `tb_client` tb_client ON tb_service.`id_client` = tb_client.`id_client`
+where tb_service.`tgl_mulai` BETWEEN $P{awal} AND $P{akhir}]]>
+	</queryString>
+	<field name="tb_trs_service_id_transaksi_service" class="java.lang.String"/>
+	<field name="tb_trs_service_id_service" class="java.lang.String"/>
+	<field name="tb_trs_service_harga_total" class="java.lang.Integer"/>
+	<field name="tb_trs_service_bayar" class="java.lang.Integer"/>
+	<field name="tb_trs_service_kembalian" class="java.lang.Integer"/>
+	<field name="tb_service_id_service" class="java.lang.String"/>
+	<field name="tb_service_nama_barang" class="java.lang.String"/>
+	<field name="tb_service_id_client" class="java.lang.String"/>
+	<field name="tb_service_keluhan" class="java.lang.String"/>
+	<field name="tb_service_tgl_mulai" class="java.sql.Date"/>
+	<field name="tb_service_tgl_selesai" class="java.sql.Date"/>
+	<field name="tb_service_status" class="java.lang.String"/>
+	<field name="tb_client_id_client" class="java.lang.String"/>
+	<field name="tb_client_nama_client" class="java.lang.String"/>
+	<field name="tb_client_alamat" class="java.lang.String"/>
+	<field name="tb_client_no_hp" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="306" y="3" width="239" height="41" uuid="efbcafe2-a796-4b8c-93af-01d7b9fff65d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="24"/>
+				</textElement>
+				<text><![CDATA[Laporan Servis]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="5" y="10" width="38" height="20" uuid="ec523463-46ba-4d02-ba6e-a732fc9bb124"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="43" y="10" width="49" height="20" uuid="b230be50-1f82-4f2b-8a9b-2bd75b17d51f"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="5" width="46" height="20" uuid="820c2ad4-0283-431b-9595-c7589e3b583d"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Id Servis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="5" width="73" height="20" uuid="592dbb2e-8e73-4583-9d80-6a9ed34a0f66"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="538" y="4" width="57" height="20" uuid="a1c80c1e-0ba5-48fb-b360-c96ec50f885a"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Tgl Selesai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="5" width="62" height="20" uuid="c94268e1-fa87-4ee5-884b-99866c64b52b"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Nama Klien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="605" y="4" width="29" height="20" uuid="7f52c666-0008-47fe-888d-53cc7c1829f6"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="801" y="1" width="1" height="28" uuid="ef5cedb2-1892-4b65-b91e-ff754e67f739"/>
+			</line>
+			<line>
+				<reportElement x="599" y="1" width="1" height="28" uuid="680a5ad1-09b0-4a9e-a4bb-644581c73b09"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="28" uuid="9311db16-56e8-4e7e-a2c6-4f21038af473"/>
+			</line>
+			<line>
+				<reportElement x="469" y="1" width="1" height="28" uuid="035bae64-600d-4057-b56b-fd3402173488"/>
+			</line>
+			<line>
+				<reportElement x="314" y="1" width="1" height="28" uuid="814716b3-f0ec-42e9-ae5e-fec68481d92f"/>
+			</line>
+			<line>
+				<reportElement x="418" y="1" width="1" height="28" uuid="ceafefe0-5728-4f05-9bf3-8485851cc44e"/>
+			</line>
+			<line>
+				<reportElement x="203" y="1" width="1" height="28" uuid="089dc312-0749-4a60-a5c7-39d24e3746c4"/>
+			</line>
+			<line>
+				<reportElement x="91" y="1" width="1" height="28" uuid="7b335b04-e7f7-47c8-8445-0854f6ecb4db"/>
+			</line>
+			<line>
+				<reportElement x="532" y="1" width="1" height="28" uuid="40a27c96-8d5c-4cfd-848c-f4ec186011e8"/>
+			</line>
+			<line>
+				<reportElement x="695" y="1" width="1" height="28" uuid="d1fe49b9-48ff-4344-b40f-8d53b8e12a86"/>
+			</line>
+			<staticText>
+				<reportElement x="475" y="4" width="53" height="20" uuid="754da412-0562-4cbd-8e7c-78efe319eb38"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Tgl Servis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="701" y="4" width="32" height="20" uuid="0ce11b1a-c5d3-4be2-a1ad-c52075c41b39"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Bayar]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="29" width="802" height="1" uuid="bef474b6-3ce1-4b6f-b16c-67e3bd7ff3d3"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="a6d51b72-7867-4910-a0ce-508ae8556d79"/>
+			</line>
+			<staticText>
+				<reportElement x="320" y="5" width="45" height="20" uuid="797f05f9-c4d7-4457-9551-5dfe3a285861"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Keluhan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="424" y="5" width="33" height="20" uuid="4f26edd5-be71-4783-a4f3-b15e79a4834f"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<line>
+				<reportElement x="801" y="0" width="1" height="30" uuid="57f781ce-98eb-4c5f-9acb-603f1aefefc9"/>
+			</line>
+			<line>
+				<reportElement x="599" y="0" width="1" height="30" uuid="5d6b2d44-3815-4a52-9897-d95e6c65c333"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="30" uuid="9848db0f-cf3d-4783-953f-b749d7d4ae9a"/>
+			</line>
+			<line>
+				<reportElement x="469" y="0" width="1" height="30" uuid="e162dc17-7982-4ce7-9af4-c079c47f32d5"/>
+			</line>
+			<line>
+				<reportElement x="314" y="0" width="1" height="30" uuid="dc80644d-27bf-461b-ac9e-bd0930cdb946"/>
+			</line>
+			<line>
+				<reportElement x="418" y="0" width="1" height="30" uuid="f346da7d-54b9-49f6-8de6-e6491075174f"/>
+			</line>
+			<line>
+				<reportElement x="203" y="0" width="1" height="30" uuid="a9abd755-51bb-4f84-bad3-f71254b5c00d"/>
+			</line>
+			<line>
+				<reportElement x="91" y="0" width="1" height="30" uuid="52236d68-ab9d-4857-8200-2da7ed811e33"/>
+			</line>
+			<line>
+				<reportElement x="532" y="0" width="1" height="30" uuid="05fe7627-0f4b-4ae3-ae8f-3287389c9656"/>
+			</line>
+			<line>
+				<reportElement x="695" y="0" width="1" height="30" uuid="d07d235c-ba08-4394-b257-163e78e47919"/>
+			</line>
+			<line>
+				<reportElement x="0" y="30" width="802" height="1" uuid="6505d01d-40fd-41d0-aa46-8913ee3bda0c"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="6" y="4" width="85" height="20" uuid="e64a20c3-35e8-489f-bc3b-511ff140bdb4"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_service_id_service}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="4" width="106" height="20" uuid="6209bd91-0a7e-453f-9174-cc9025f990a8"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_client_nama_client}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="4" width="105" height="20" uuid="dc1c8847-d733-42e6-bf68-761d120c70b9"/>
+				<textFieldExpression><![CDATA[$F{tb_service_nama_barang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="4" width="98" height="20" uuid="d90a12b4-dd0e-4562-b05f-a076018cce63"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_service_keluhan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="4" width="45" height="20" uuid="0a79acc4-08cf-47a7-a395-e049c318ef6c"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_service_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="4" width="53" height="20" uuid="ac1ecaa7-8074-4fa8-ad0c-4f97dcc2d371"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_service_tgl_mulai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="538" y="4" width="57" height="20" uuid="b69d2487-f2a9-4f45-8593-d7b8ab48f86e"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tb_service_tgl_selesai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="605" y="4" width="88" height="20" uuid="affaefb4-4fec-4030-875a-49105b529456"/>
+				<textFieldExpression><![CDATA[$F{tb_trs_service_harga_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="701" y="4" width="98" height="20" uuid="42e9d039-02cd-442c-991c-53d8d4643286"/>
+				<textFieldExpression><![CDATA[$F{tb_trs_service_bayar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="23">
+			<textField>
+				<reportElement x="769" y="0" width="33" height="20" uuid="f4e86452-e687-49c5-b01a-17a7519a3a1e"/>
+				<textElement>
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>
